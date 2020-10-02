@@ -1,0 +1,28 @@
+<!-- Modal -->
+<div #modal class="modal fade" tabindex="-1">
+  <div class="modal-dialog" [ngClass]="{ 'modal-sm': checkApplicableSize(ModalSize.sm), 'modal-lg': checkApplicableSize(ModalSize.lg), 'modal-xl': checkApplicableSize(ModalSize.xl), 'modal-dialog-centered': internalModalService.currentModalConfig?.centered, 'modal-dialog-scrollable': internalModalService.currentModalConfig?.scrollable }">
+    <div class="modal-content">
+
+      <!-- Header -->
+      <div *ngIf="internalModalService.currentModalConfig && (internalModalService.currentModalConfig.title || internalModalService.currentModalConfig?.closable)" class="modal-header">
+        <h5 *ngIf="internalModalService.currentModalConfig?.title" class="modal-title">{{ internalModalService.currentModalConfig.title }}</h5>
+
+        <button *ngIf="internalModalService.currentModalConfig.closable" type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        <ng-template grkndModalBody></ng-template>
+      </div>
+
+      <!-- Footer -->
+      <div *ngIf="internalModalService.currentModalConfig && (internalModalService.currentModalConfig.accept || internalModalService.currentModalConfig.cancel)" class="modal-footer">
+        <button *ngIf="internalModalService.currentModalConfig.cancel" type="button" class="btn btn-secondary" data-dismiss="modal">{{ internalModalService.currentModalConfig?.cancelText }}</button>
+        <button *ngIf="internalModalService.currentModalConfig.accept" type="button" class="btn btn-primary" (click)="accept()">{{ internalModalService.currentModalConfig?.acceptText }}</button>
+      </div>
+
+    </div>
+  </div>
+</div>
